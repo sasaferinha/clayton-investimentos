@@ -20,7 +20,7 @@ export default function Home() {
           <span>CLAYTON<small>INVESTIMENTOS</small></span>
         </a>
         <nav aria-label="Navegação principal">
-          <a href="#sobre">Sobre</a><a href="#metodo">Método</a><a href="#contato">Contato</a>
+          <a href="#inicio">Início</a><a href="#diferenciais">Estratégia</a><a href="#contato">Contato</a>
         </nav>
         <a className="navCta" href="#contato">Fale comigo <span>↗</span></a>
       </header>
@@ -33,11 +33,11 @@ export default function Home() {
             <p className="eyebrow"><span/> ASSESSORIA DE INVESTIMENTOS</p>
             <h1>Seu patrimônio merece <em>estratégia.</em></h1>
             <p className="lead">Eu te ajudo a investir com segurança, clareza e direção — para transformar objetivos em um plano que realmente trabalha por você.</p>
-            <div className="heroActions">
+            <div className="heroActions" id="contato">
               <a className="primary" href="#contato">Quero investir melhor <span>↗</span></a>
               <a className="textLink" href="#metodo"><span className="play">▶</span> Conheça meu método</a>
             </div>
-            <div className="proof">
+            <div className="proof" id="diferenciais">
               <div><strong>+11M</strong><span>sob gestão</span></div>
               <div><strong>100%</strong><span>foco no cliente</span></div>
               <div><strong>1:1</strong><span>atendimento próximo</span></div>
