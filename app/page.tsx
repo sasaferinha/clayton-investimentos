@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description: "Estratégia personalizada para investir com segurança e construir patrimônio.",
 };
 
-const whatsappUrl = "https://wa.me/553599069477";
+const whatsappUrl = "https://wa.me/553599069477?text=Vim%20pelo%20site%20e%20quero%20investir%20melhor";
 
 const benefits = [
   ["01", "Estratégia sob medida", "Uma carteira desenhada para seus objetivos, prazo e perfil de risco."],
