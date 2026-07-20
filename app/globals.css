@@ -73,3 +73,26 @@ body .hero h1,body .proof strong,body .nameCard strong,body .brandMark,body .abo
 .portrait{scale:1.296}
 
 .ctaInner>div:last-child .contactPhone{margin:12px 0 0;color:#a9b3c2;font-size:12px;letter-spacing:.4px}
+
+/* Mobile section navigation */
+.mobileNav{display:none}
+@media(max-width:850px){
+  body{overflow:auto}
+  .nav{position:fixed;top:0;height:72px;background:rgba(5,13,25,.92);backdrop-filter:blur(14px);z-index:50}
+  .navCta{display:none}
+  .mobileNav{display:block;position:relative}
+  .mobileNav summary{width:46px;height:46px;border:1px solid #2776e8;display:grid;place-content:center;gap:5px;cursor:pointer;list-style:none;background:#071426}
+  .mobileNav summary::-webkit-details-marker{display:none}
+  .mobileNav summary i{display:block;width:18px;height:1px;background:#67adff;transition:.25s}
+  .mobileNav[open] summary i:first-child{transform:translateY(6px) rotate(45deg)}
+  .mobileNav[open] summary i:nth-child(2){opacity:0}
+  .mobileNav[open] summary i:last-child{transform:translateY(-6px) rotate(-45deg)}
+  .mobileNavPanel{position:fixed;top:72px;left:16px;right:16px;padding:10px 18px 18px;background:rgba(5,13,25,.98);border:1px solid rgba(53,126,225,.35);box-shadow:0 24px 55px rgba(0,0,0,.55);display:grid}
+  .mobileNavPanel a{padding:15px 4px;border-bottom:1px solid var(--line);color:#c5d0df;font-size:13px;letter-spacing:.7px}
+  .mobileNavPanel a:last-child{border:0}
+  .mobileNavPanel .mobileContact{margin-top:10px;padding:15px;background:#1268ff;color:white;text-align:center;font-weight:700;text-transform:uppercase;font-size:11px}
+  .mobileContact span{margin-left:8px}
+  .about,.method,.cta,footer{display:grid}
+  footer{display:flex}
+  .about,.method,.cta{scroll-margin-top:72px}
+}

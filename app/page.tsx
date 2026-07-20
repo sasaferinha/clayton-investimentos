@@ -25,6 +25,16 @@ export default function Home() {
           <a href="#inicio">Início</a><a href="#diferenciais">Estratégia</a><a href={whatsappUrl} target="_blank" rel="noreferrer">Contato</a>
         </nav>
         <a className="navCta" href={whatsappUrl} target="_blank" rel="noreferrer">Fale comigo <span>↗</span></a>
+        <details className="mobileNav">
+          <summary aria-label="Abrir menu de navegação"><i/><i/><i/></summary>
+          <div className="mobileNavPanel">
+            <a href="#inicio">Início</a>
+            <a href="#diferenciais">Estratégia</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#metodo">Método</a>
+            <a className="mobileContact" href={whatsappUrl} target="_blank" rel="noreferrer">Contato pelo WhatsApp <span>↗</span></a>
+          </div>
+        </details>
       </header>
 
       <section className="hero" id="inicio">
