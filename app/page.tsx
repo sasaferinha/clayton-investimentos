@@ -46,7 +46,7 @@ export default function Home() {
 
           <div className="portraitWrap">
             <div className="marketCard marketCardTop"><span>IBOV</span><strong>▲ 1,42%</strong><small>Mercado em alta</small></div>
-            <img className="portrait" src="/images/clayton.png" alt="Clayton, assessor de investimentos" />
+            <img className="portrait" src="/images/clayton-eye-corrected-final.png" alt="Clayton, assessor de investimentos" />
             <div className="nameCard"><small>ASSESSOR DE INVESTIMENTOS</small><strong>Clayton</strong><span>Estratégia • Segurança • Resultado</span></div>
             <div className="marketCard marketCardBottom"><span>ESTRATÉGIA</span><strong>PERSONALIZADA</strong><small>para o seu perfil</small></div>
           </div>
