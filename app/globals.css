@@ -70,4 +70,4 @@ body .hero h1,body .proof strong,body .nameCard strong,body .brandMark,body .abo
 @media(max-width:500px){.portrait{height:120%;width:120%;transform:translateX(-10%)}}
 
 /* Proportional enlargement without changing position */
-.portrait{scale:1.62}
+.portrait{scale:1.296}
