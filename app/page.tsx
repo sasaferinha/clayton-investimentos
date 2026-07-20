@@ -5,6 +5,8 @@ export const metadata: Metadata = {
   description: "Estratégia personalizada para investir com segurança e construir patrimônio.",
 };
 
+const whatsappUrl = "https://wa.me/553599069477";
+
 const benefits = [
   ["01", "Estratégia sob medida", "Uma carteira desenhada para seus objetivos, prazo e perfil de risco."],
   ["02", "Decisões com clareza", "Acompanhamento próximo para você entender cada movimento do seu patrimônio."],
@@ -22,7 +24,7 @@ export default function Home() {
         <nav aria-label="Navegação principal">
           <a href="#inicio">Início</a><a href="#diferenciais">Estratégia</a><a href="#contato">Contato</a>
         </nav>
-        <a className="navCta" href="#contato">Fale comigo <span>↗</span></a>
+        <a className="navCta" href={whatsappUrl} target="_blank" rel="noreferrer">Fale comigo <span>↗</span></a>
       </header>
 
       <section className="hero" id="inicio">
@@ -34,7 +36,7 @@ export default function Home() {
             <h1>Seu patrimônio merece <em>estratégia.</em></h1>
             <p className="lead">Eu te ajudo a investir com segurança, clareza e direção — para transformar objetivos em um plano que realmente trabalha por você.</p>
             <div className="heroActions" id="contato">
-              <a className="primary" href="#contato">Quero investir melhor <span>↗</span></a>
+              <a className="primary" href={whatsappUrl} target="_blank" rel="noreferrer">Quero investir melhor <span>↗</span></a>
               <a className="textLink" href="#metodo"><span className="play">▶</span> Conheça meu método</a>
             </div>
             <div className="proof" id="diferenciais">
@@ -56,7 +58,7 @@ export default function Home() {
 
       <section className="about shell" id="sobre">
         <div><p className="eyebrow"><span/> SOBRE A ASSESSORIA</p><h2>Investir bem não é sorte.<br/>É ter <em>direção.</em></h2></div>
-        <div className="aboutText"><p>Mais do que indicar produtos, meu trabalho é entender sua vida financeira e construir uma estratégia coerente com onde você está e onde quer chegar.</p><p>Sem promessas fáceis. Sem linguagem complicada. Com método, transparência e acompanhamento de verdade.</p><a href="#contato">Vamos conversar <span>↗</span></a></div>
+        <div className="aboutText"><p>Mais do que indicar produtos, meu trabalho é entender sua vida financeira e construir uma estratégia coerente com onde você está e onde quer chegar.</p><p>Sem promessas fáceis. Sem linguagem complicada. Com método, transparência e acompanhamento de verdade.</p><a href={whatsappUrl} target="_blank" rel="noreferrer">Vamos conversar <span>↗</span></a></div>
       </section>
 
       <section className="method" id="metodo">
@@ -68,7 +70,7 @@ export default function Home() {
       </section>
 
       <section className="cta" id="contato">
-        <div className="shell ctaInner"><div><p className="eyebrow"><span/> PRÓXIMO PASSO</p><h2>Seu futuro financeiro<br/>começa com uma <em>conversa.</em></h2></div><div><p>Conte seus objetivos e descubra como uma estratégia personalizada pode fazer seu patrimônio avançar.</p><a className="primary" href="https://wa.me/5500000000000" target="_blank" rel="noreferrer">Agendar conversa <span>↗</span></a></div></div>
+        <div className="shell ctaInner"><div><p className="eyebrow"><span/> PRÓXIMO PASSO</p><h2>Seu futuro financeiro<br/>começa com uma <em>conversa.</em></h2></div><div><p>Conte seus objetivos e descubra como uma estratégia personalizada pode fazer seu patrimônio avançar.</p><a className="primary" href={whatsappUrl} target="_blank" rel="noreferrer">Agendar conversa <span>↗</span></a><p className="contactPhone">WhatsApp: (35) 9906-9477</p></div></div>
       </section>
 
       <footer className="shell"><div className="brand"><span className="brandMark">C</span><span>CLAYTON<small>INVESTIMENTOS</small></span></div><p>Investimentos envolvem riscos. Rentabilidade passada não representa garantia de rentabilidade futura.</p><span>© 2026 Clayton</span></footer>
