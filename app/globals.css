@@ -68,3 +68,6 @@ body .hero h1,body .proof strong,body .nameCard strong,body .brandMark,body .abo
 .portrait{height:132%;width:132%;transform:translateX(-15%)}
 @media(max-width:850px){.portrait{height:122%;width:122%;transform:translateX(-11%)}}
 @media(max-width:500px){.portrait{height:120%;width:120%;transform:translateX(-10%)}}
+
+/* Proportional enlargement without changing position */
+.portrait{scale:1.08}
