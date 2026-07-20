@@ -22,7 +22,7 @@ export default function Home() {
           <span>CLAYTON<small>INVESTIMENTOS</small></span>
         </a>
         <nav aria-label="Navegação principal">
-          <a href="#inicio">Início</a><a href="#diferenciais">Estratégia</a><a href="#contato">Contato</a>
+          <a href="#inicio">Início</a><a href="#diferenciais">Estratégia</a><a href={whatsappUrl} target="_blank" rel="noreferrer">Contato</a>
         </nav>
         <a className="navCta" href={whatsappUrl} target="_blank" rel="noreferrer">Fale comigo <span>↗</span></a>
       </header>
