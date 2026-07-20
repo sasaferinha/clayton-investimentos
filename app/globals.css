@@ -151,3 +151,12 @@ body:has(.innerPage){overflow:auto}
   .profileNote{display:block}
   .profileNote p{margin-top:10px}
 }
+
+/* Restore page scrolling and below-the-fold sections on desktop */
+@media(min-width:851px){
+  body{overflow:auto}
+  .hero{min-height:100svh}
+  .about{display:grid}
+  .method,.cta{display:block}
+  footer{display:flex}
+}
