@@ -54,3 +54,11 @@
   .proof span{font-size:7px;letter-spacing:.7px}
   .portraitWrap{right:-22%;width:88%;height:68%;bottom:34px}
 }
+
+/* Final visual alignment */
+.eyebrow span{display:none}
+body .hero h1,body .proof strong,body .nameCard strong,body .brandMark,body .about h2,body .method h2,body .cta h2{font-family:Arial,Helvetica,sans-serif}
+.hero h1{font-weight:700;letter-spacing:-2.4px}
+.portrait{height:120%;width:120%;transform:translateX(-9%);filter:brightness(.92) contrast(1.08) saturate(.9) drop-shadow(0 28px 42px rgba(0,0,0,.5))}
+@media(max-width:850px){.portrait{height:114%;width:114%;transform:translateX(-7%)}}
+@media(max-width:500px){.portrait{height:112%;width:112%;transform:translateX(-6%)}}
