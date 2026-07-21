@@ -1,0 +1,8 @@
+dist
+outputs
+.wrangler
+.open-next
+public/images/clayton-clean-cutout.png
+public/images/clayton-eye-corrected.png
+public/images/clayton-eye-corrected-v2.png
+public/images/clayton-hq-chroma.png
