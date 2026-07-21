@@ -25,7 +25,7 @@ export default function Home() {
           <span>CLAYTON<small>INVESTIMENTOS</small></span>
         </a>
         <nav aria-label="Navegação principal">
-          <a href="#inicio">Início</a><a href="#estrategias">Estratégias</a><a href="/perfil-investidor">Seu perfil</a><a href={whatsappUrl} target="_blank" rel="noreferrer">Contato</a>
+          <a href="#inicio">Início</a><a href="#estrategias">Estratégias</a><a href={whatsappUrl} target="_blank" rel="noreferrer">Contato</a>
         </nav>
         <a className="navCta" href={whatsappUrl} target="_blank" rel="noreferrer">Fale comigo <span>↗</span></a>
         <details className="mobileNav">
@@ -33,7 +33,6 @@ export default function Home() {
           <div className="mobileNavPanel">
             <a href="#inicio">Início</a>
             <a href="#estrategias">Estratégias</a>
-            <a href="/perfil-investidor">Seu perfil</a>
             <a href="#sobre">Sobre</a>
             <a className="mobileContact" href={whatsappUrl} target="_blank" rel="noreferrer">Contato pelo WhatsApp <span>↗</span></a>
           </div>
