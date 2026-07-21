@@ -174,4 +174,4 @@ body:has(.innerPage){overflow:auto}
 
 .marketCardBottom{text-align:center}
 
-.brandMark{transform:none!important;line-height:1;text-align:center}
+.brandMark{display:flex!important;align-items:center!important;justify-content:center!important;transform:none!important;line-height:1!important;text-align:center!important;padding:1px 0 0!important;text-indent:0!important}
