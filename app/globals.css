@@ -173,3 +173,5 @@ body:has(.innerPage){overflow:auto}
 .strategySection .innerSectionHead h2{margin-left:0;max-width:760px}
 
 .marketCardBottom{text-align:center}
+
+.brandMark{transform:none!important;line-height:1;text-align:center}
