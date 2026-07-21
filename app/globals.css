@@ -167,3 +167,5 @@ body:has(.innerPage){overflow:auto}
 .ticker .tickerTrack span{flex:none;padding-right:64px;word-spacing:16px}
 @keyframes tickerLoop{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.ticker .tickerTrack{animation:none}}
+
+.strategySection{background:#08111f;border-block:1px solid var(--line);scroll-margin-top:76px}

@@ -7,10 +7,13 @@ export const metadata: Metadata = {
 
 const whatsappUrl = "https://wa.me/553599069477?text=Vim%20pelo%20site%20e%20quero%20investir%20melhor";
 
-const benefits = [
-  ["01", "Estratégia sob medida", "Uma carteira desenhada para seus objetivos, prazo e perfil de risco."],
-  ["02", "Decisões com clareza", "Acompanhamento próximo para você entender cada movimento do seu patrimônio."],
-  ["03", "Visão de longo prazo", "Disciplina, diversificação e método para evoluir em todos os ciclos do mercado."],
+const strategies = [
+  ["01", "Reserva e liquidez", "Organização da base financeira com segurança e acesso ao dinheiro quando você precisar."],
+  ["02", "Renda fixa", "Seleção de ativos de acordo com prazo, objetivo, proteção e oportunidades de mercado."],
+  ["03", "Fundos de investimento", "Diversificação com gestão profissional e escolhas coerentes com o seu perfil."],
+  ["04", "Renda variável", "Exposição planejada ao crescimento, respeitando limites de risco e visão de longo prazo."],
+  ["05", "Previdência", "Estratégias para aposentadoria, sucessão e eficiência tributária ao longo dos anos."],
+  ["06", "Proteção patrimonial", "Decisões integradas para preservar o patrimônio e dar tranquilidade à sua família."],
 ];
 
 export default function Home() {
@@ -22,17 +25,16 @@ export default function Home() {
           <span>CLAYTON<small>INVESTIMENTOS</small></span>
         </a>
         <nav aria-label="Navegação principal">
-          <a href="#inicio">Início</a><a href="/estrategias">Estratégias</a><a href="/perfil-investidor">Seu perfil</a><a href={whatsappUrl} target="_blank" rel="noreferrer">Contato</a>
+          <a href="#inicio">Início</a><a href="#estrategias">Estratégias</a><a href="/perfil-investidor">Seu perfil</a><a href={whatsappUrl} target="_blank" rel="noreferrer">Contato</a>
         </nav>
         <a className="navCta" href={whatsappUrl} target="_blank" rel="noreferrer">Fale comigo <span>↗</span></a>
         <details className="mobileNav">
           <summary aria-label="Abrir menu de navegação"><i/><i/><i/></summary>
           <div className="mobileNavPanel">
             <a href="#inicio">Início</a>
-            <a href="/estrategias">Estratégias</a>
+            <a href="#estrategias">Estratégias</a>
             <a href="/perfil-investidor">Seu perfil</a>
             <a href="#sobre">Sobre</a>
-            <a href="#metodo">Método</a>
             <a className="mobileContact" href={whatsappUrl} target="_blank" rel="noreferrer">Contato pelo WhatsApp <span>↗</span></a>
           </div>
         </details>
@@ -48,7 +50,6 @@ export default function Home() {
             <p className="lead">Eu te ajudo a investir com segurança, clareza e direção — para transformar objetivos em um plano que realmente trabalha por você.</p>
             <div className="heroActions" id="contato">
               <a className="primary" href={whatsappUrl} target="_blank" rel="noreferrer">Quero investir melhor <span>↗</span></a>
-              <a className="textLink" href="#metodo"><span className="play">▶</span> Conheça meu método</a>
             </div>
             <div className="proof" id="diferenciais">
               <div><strong>+11M</strong><span>sob gestão</span></div>
@@ -77,11 +78,10 @@ export default function Home() {
         <div className="aboutText"><p>Mais do que indicar produtos, meu trabalho é entender sua vida financeira e construir uma estratégia coerente com onde você está e onde quer chegar.</p><p>Sem promessas fáceis. Sem linguagem complicada. Com método, transparência e acompanhamento de verdade.</p><a href={whatsappUrl} target="_blank" rel="noreferrer">Vamos conversar <span>↗</span></a></div>
       </section>
 
-      <section className="method" id="metodo">
+      <section className="innerSection strategySection" id="estrategias">
         <div className="shell">
-          <p className="eyebrow"><span/> COMO POSSO AJUDAR</p>
-          <div className="sectionHead"><h2>Patrimônio se constrói<br/>com <em>boas decisões.</em></h2><p>Um processo simples, estratégico e sempre alinhado ao que faz sentido para você.</p></div>
-          <div className="cards">{benefits.map(([n,t,d]) => <article key={n}><span className="cardNo">{n}</span><div className="icon">↗</div><h3>{t}</h3><p>{d}</p></article>)}</div>
+          <div className="innerSectionHead"><p className="eyebrow">ESTRATÉGIAS DE INVESTIMENTO</p><h2>Uma carteira com propósito,<br/><em>não um conjunto de produtos.</em></h2></div>
+          <div className="strategyGrid">{strategies.map(([n,t,d]) => <article key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></article>)}</div>
         </div>
       </section>
 

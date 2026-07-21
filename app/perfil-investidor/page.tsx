@@ -18,7 +18,7 @@ export default function PerfilInvestidorPage() {
     <main className="innerPage">
       <header className="innerNav shell">
         <a className="brand" href="/"><span className="brandMark">C</span><span>CLAYTON<small>INVESTIMENTOS</small></span></a>
-        <nav aria-label="Navegação"><a href="/">Início</a><a href="/estrategias">Estratégias</a></nav>
+        <nav aria-label="Navegação"><a href="/">Início</a><a href="/#estrategias">Estratégias</a></nav>
         <a className="navCta" href={whatsappUrl} target="_blank" rel="noreferrer">Fale comigo <span>↗</span></a>
       </header>
 
