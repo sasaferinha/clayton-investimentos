@@ -169,3 +169,5 @@ body:has(.innerPage){overflow:auto}
 @media(prefers-reduced-motion:reduce){.ticker .tickerTrack{animation:none}}
 
 .strategySection{background:#08111f;border-block:1px solid var(--line);scroll-margin-top:76px}
+.strategySection .innerSectionHead{display:block;text-align:left}
+.strategySection .innerSectionHead h2{margin-left:0;max-width:760px}
