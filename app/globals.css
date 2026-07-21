@@ -171,3 +171,5 @@ body:has(.innerPage){overflow:auto}
 .strategySection{background:#08111f;border-block:1px solid var(--line);scroll-margin-top:76px}
 .strategySection .innerSectionHead{display:block;text-align:left}
 .strategySection .innerSectionHead h2{margin-left:0;max-width:760px}
+
+.marketCardBottom{text-align:center}
