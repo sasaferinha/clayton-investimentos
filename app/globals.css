@@ -160,3 +160,10 @@ body:has(.innerPage){overflow:auto}
   .method,.cta{display:block}
   footer{display:flex}
 }
+
+/* Full-width seamless investment ticker */
+.ticker{width:100vw!important;max-width:none;left:50%!important;right:auto!important;transform:translateX(-50%);padding:0}
+.ticker .tickerTrack{display:flex;width:max-content;min-width:0;word-spacing:0;animation:tickerLoop 28s linear infinite;will-change:transform}
+.ticker .tickerTrack span{flex:none;padding-right:64px;word-spacing:16px}
+@keyframes tickerLoop{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.ticker .tickerTrack{animation:none}}

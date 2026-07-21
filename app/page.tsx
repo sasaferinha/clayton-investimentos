@@ -7,6 +7,12 @@ export const metadata: Metadata = {
 
 const whatsappUrl = "https://wa.me/553599069477?text=Vim%20pelo%20site%20e%20quero%20investir%20melhor";
 
+const benefits = [
+  ["01", "Estratégia sob medida", "Uma carteira desenhada para seus objetivos, prazo e perfil de risco."],
+  ["02", "Decisões com clareza", "Acompanhamento próximo para você entender cada movimento do seu patrimônio."],
+  ["03", "Visão de longo prazo", "Disciplina, diversificação e método para evoluir em todos os ciclos do mercado."],
+];
+
 export default function Home() {
   return (
     <main>
@@ -26,6 +32,7 @@ export default function Home() {
             <a href="/estrategias">Estratégias</a>
             <a href="/perfil-investidor">Seu perfil</a>
             <a href="#sobre">Sobre</a>
+            <a href="#metodo">Método</a>
             <a className="mobileContact" href={whatsappUrl} target="_blank" rel="noreferrer">Contato pelo WhatsApp <span>↗</span></a>
           </div>
         </details>
@@ -41,7 +48,7 @@ export default function Home() {
             <p className="lead">Eu te ajudo a investir com segurança, clareza e direção — para transformar objetivos em um plano que realmente trabalha por você.</p>
             <div className="heroActions" id="contato">
               <a className="primary" href={whatsappUrl} target="_blank" rel="noreferrer">Quero investir melhor <span>↗</span></a>
-              <a className="textLink" href="/estrategias"><span className="play">▶</span> Conheça as estratégias</a>
+              <a className="textLink" href="#metodo"><span className="play">▶</span> Conheça meu método</a>
             </div>
             <div className="proof" id="diferenciais">
               <div><strong>+11M</strong><span>sob gestão</span></div>
@@ -57,12 +64,25 @@ export default function Home() {
             <div className="marketCard marketCardBottom"><span>ESTRATÉGIA</span><strong>PERSONALIZADA</strong><small>para o seu perfil</small></div>
           </div>
         </div>
-        <div className="ticker" aria-label="Áreas de atuação"><div>RENDA FIXA <b>◆</b> FUNDOS DE INVESTIMENTO <b>◆</b> RENDA VARIÁVEL <b>◆</b> PREVIDÊNCIA <b>◆</b> PROTEÇÃO PATRIMONIAL <b>◆</b></div></div>
+        <div className="ticker" aria-label="Áreas de atuação">
+          <div className="tickerTrack">
+            <span>RENDA FIXA <b>◆</b> FUNDOS DE INVESTIMENTO <b>◆</b> RENDA VARIÁVEL <b>◆</b> PREVIDÊNCIA <b>◆</b> PROTEÇÃO PATRIMONIAL <b>◆</b></span>
+            <span aria-hidden="true">RENDA FIXA <b>◆</b> FUNDOS DE INVESTIMENTO <b>◆</b> RENDA VARIÁVEL <b>◆</b> PREVIDÊNCIA <b>◆</b> PROTEÇÃO PATRIMONIAL <b>◆</b></span>
+          </div>
+        </div>
       </section>
 
       <section className="about shell" id="sobre">
         <div><p className="eyebrow"><span/> SOBRE A ASSESSORIA</p><h2>Investir bem não é sorte.<br/>É ter <em>direção.</em></h2></div>
         <div className="aboutText"><p>Mais do que indicar produtos, meu trabalho é entender sua vida financeira e construir uma estratégia coerente com onde você está e onde quer chegar.</p><p>Sem promessas fáceis. Sem linguagem complicada. Com método, transparência e acompanhamento de verdade.</p><a href={whatsappUrl} target="_blank" rel="noreferrer">Vamos conversar <span>↗</span></a></div>
+      </section>
+
+      <section className="method" id="metodo">
+        <div className="shell">
+          <p className="eyebrow"><span/> COMO POSSO AJUDAR</p>
+          <div className="sectionHead"><h2>Patrimônio se constrói<br/>com <em>boas decisões.</em></h2><p>Um processo simples, estratégico e sempre alinhado ao que faz sentido para você.</p></div>
+          <div className="cards">{benefits.map(([n,t,d]) => <article key={n}><span className="cardNo">{n}</span><div className="icon">↗</div><h3>{t}</h3><p>{d}</p></article>)}</div>
+        </div>
       </section>
 
       <section className="cta" id="contato">
