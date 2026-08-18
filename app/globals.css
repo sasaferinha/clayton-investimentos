@@ -71,6 +71,7 @@ body .hero h1,body .proof strong,body .nameCard strong,body .brandMark,body .abo
 
 /* Proportional enlargement without changing position */
 .portrait{scale:1.296}
+@media(min-width:851px){.portrait{scale:1.6}}
 
 .ctaInner>div:last-child .contactPhone{margin:12px 0 0;color:#a9b3c2;font-size:12px;letter-spacing:.4px}
 
