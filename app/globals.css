@@ -72,10 +72,6 @@ body .hero h1,body .proof strong,body .nameCard strong,body .brandMark,body .abo
 /* Proportional enlargement without changing position */
 .portrait{scale:1.296}
 
-/* Preserve Clayton's visual size on wide/full-screen displays */
-@media(min-width:1440px){.portrait{scale:1.42}}
-@media(min-width:1720px){.portrait{scale:1.52}}
-
 .ctaInner>div:last-child .contactPhone{margin:12px 0 0;color:#a9b3c2;font-size:12px;letter-spacing:.4px}
 
 /* Mobile section navigation */
