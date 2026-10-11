@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ManagedAssetsMetric from "./ManagedAssetsMetric";
 
 export const metadata: Metadata = {
   title: "Clayton | Assessor de Investimentos",
@@ -15,6 +16,10 @@ const strategies = [
   ["05", "Previdência", "Estratégias para aposentadoria, sucessão e eficiência tributária ao longo dos anos."],
   ["06", "Proteção patrimonial", "Decisões integradas para preservar o patrimônio e dar tranquilidade à sua família."],
 ];
+
+const tickerText = (
+  <>RENDA FIXA <b>◆</b> FUNDOS DE INVESTIMENTO <b>◆</b> RENDA VARIÁVEL <b>◆</b> PREVIDÊNCIA <b>◆</b> PROTEÇÃO PATRIMONIAL <b>◆</b></>
+);
 
 export default function Home() {
   return (
@@ -51,7 +56,7 @@ export default function Home() {
               <a className="primary" href={whatsappUrl} target="_blank" rel="noreferrer">Quero investir melhor <span>↗</span></a>
             </div>
             <div className="proof" id="diferenciais">
-              <div><strong>+11M</strong><span>sob gestão</span></div>
+              <ManagedAssetsMetric />
               <div><strong>100%</strong><span>foco no cliente</span></div>
               <div><strong>1:1</strong><span>atendimento próximo</span></div>
             </div>
@@ -66,8 +71,9 @@ export default function Home() {
         </div>
         <div className="ticker" aria-label="Áreas de atuação">
           <div className="tickerTrack">
-            <span>RENDA FIXA <b>◆</b> FUNDOS DE INVESTIMENTO <b>◆</b> RENDA VARIÁVEL <b>◆</b> PREVIDÊNCIA <b>◆</b> PROTEÇÃO PATRIMONIAL <b>◆</b></span>
-            <span aria-hidden="true">RENDA FIXA <b>◆</b> FUNDOS DE INVESTIMENTO <b>◆</b> RENDA VARIÁVEL <b>◆</b> PREVIDÊNCIA <b>◆</b> PROTEÇÃO PATRIMONIAL <b>◆</b></span>
+            {Array.from({ length: 4 }, (_, index) => (
+              <span key={index} aria-hidden={index === 0 ? undefined : true}>{tickerText}</span>
+            ))}
           </div>
         </div>
       </section>
