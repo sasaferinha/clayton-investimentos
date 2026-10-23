@@ -50,6 +50,7 @@ test("settings endpoint returns safe defaults without a database", async () => {
     managedAssetsValue: "+11M",
     managedAssetsLabel: "sob gestão",
     canEdit: false,
+    canManageUsers: false,
   });
 });
 

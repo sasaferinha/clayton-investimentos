@@ -202,4 +202,13 @@ body:has(.innerPage){overflow:auto}
 .adminForm button:disabled{opacity:.6;cursor:wait}
 .adminStatus{color:#77b8ff;font-size:12px;line-height:1.6;margin:18px 0 0}
 .adminLogin p{color:#9ba8ba;line-height:1.7;margin:0 0 24px}
+.adminAccess{margin-top:34px;padding-top:28px;border-top:1px solid var(--line)}
+.adminAccess h2{font-size:21px;margin:0 0 8px}
+.adminAccess>p{color:#8fa1b9;font-size:12px;line-height:1.6;margin:0 0 18px}
+.adminInvite{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.adminInvite button{margin:0;padding:15px 18px;background:#16345b}
+.adminUsers{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:8px}
+.adminUsers li{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:11px 13px;background:#050b14;border:1px solid #1c304a;color:#b7c4d5;font-size:12px}
+.adminUsers button{margin:0;background:transparent;color:#ff8b8b;font-size:11px}
 @media(max-width:600px){.adminHeader{height:72px}.adminShell{padding-top:55px}.adminShell h1{font-size:39px}.adminForm,.adminLogin{padding:22px}}
+@media(max-width:600px){.adminInvite{grid-template-columns:1fr}.adminInvite button{width:100%}}

@@ -6,6 +6,7 @@ interface Env {
   ASSETS: Fetcher;
   DB?: D1Database;
   ADMIN_USER_ID?: string;
+  ADMIN_OWNER_EMAIL?: string;
   IMAGES: {
     input(stream: ReadableStream): {
       transform(options: Record<string, unknown>): {
@@ -30,6 +31,74 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
+    const normalizeEmail = (value: string | null | undefined) => value?.trim().toLowerCase() ?? "";
+    const userId = request.headers.get("oai-authenticated-user-id");
+    const userEmail = normalizeEmail(request.headers.get("oai-authenticated-user-email"));
+    const isOwner = Boolean(
+      (userId && env.ADMIN_USER_ID && userId === env.ADMIN_USER_ID) ||
+      (userEmail && env.ADMIN_OWNER_EMAIL && userEmail === normalizeEmail(env.ADMIN_OWNER_EMAIL)),
+    );
+    const isInvitedAdmin = async () => {
+      if (!userEmail || !env.DB) return false;
+      const row = await env.DB.prepare("SELECT email FROM admin_users WHERE email = ?")
+        .bind(userEmail)
+        .first<{ email: string }>();
+      return Boolean(row);
+    };
+
+    if (url.pathname === "/api/admin-users") {
+      if (!userId) {
+        return Response.json({ error: "Faça login para continuar." }, { status: 401 });
+      }
+
+      if (!isOwner) {
+        return Response.json({ error: "Apenas o proprietário pode gerenciar acessos." }, { status: 403 });
+      }
+
+      if (!env.DB) {
+        return Response.json({ error: "Banco de dados indisponível." }, { status: 503 });
+      }
+
+      if (request.method === "GET") {
+        const result = await env.DB.prepare("SELECT email, created_at FROM admin_users ORDER BY email").all<{
+          email: string;
+          created_at: string;
+        }>();
+        return Response.json({ admins: result.results ?? [] });
+      }
+
+      if (request.method === "POST") {
+        let body: { email?: unknown };
+        try {
+          body = await request.json();
+        } catch {
+          return Response.json({ error: "Dados inválidos." }, { status: 400 });
+        }
+
+        const email = normalizeEmail(typeof body.email === "string" ? body.email : "");
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254) {
+          return Response.json({ error: "Informe um e-mail válido." }, { status: 400 });
+        }
+
+        const createdAt = new Date().toISOString();
+        await env.DB.prepare(
+          "INSERT INTO admin_users (email, created_at) VALUES (?, ?) ON CONFLICT(email) DO NOTHING",
+        )
+          .bind(email, createdAt)
+          .run();
+        return Response.json({ email, created_at: createdAt }, { status: 201 });
+      }
+
+      if (request.method === "DELETE") {
+        const email = normalizeEmail(url.searchParams.get("email"));
+        if (!email) return Response.json({ error: "E-mail obrigatório." }, { status: 400 });
+        await env.DB.prepare("DELETE FROM admin_users WHERE email = ?").bind(email).run();
+        return Response.json({ ok: true });
+      }
+
+      return new Response("Method not allowed", { status: 405, headers: { Allow: "GET, POST, DELETE" } });
+    }
+
     if (url.pathname === "/api/site-settings") {
       const defaults = {
         managedAssetsValue: "+11M",
@@ -52,9 +121,9 @@ const worker = {
           }
         }
 
-        const userId = request.headers.get("oai-authenticated-user-id");
+        const canEdit = isOwner || (await isInvitedAdmin());
         return Response.json(
-          { ...settings, canEdit: Boolean(userId && env.ADMIN_USER_ID && userId === env.ADMIN_USER_ID) },
+          { ...settings, canEdit, canManageUsers: isOwner },
           {
             headers: {
               "Access-Control-Allow-Origin": "*",
@@ -65,14 +134,12 @@ const worker = {
       }
 
       if (request.method === "PUT") {
-        const userId = request.headers.get("oai-authenticated-user-id");
-
         if (!userId) {
           return Response.json({ error: "Faça login para editar." }, { status: 401 });
         }
 
-        if (!env.ADMIN_USER_ID || userId !== env.ADMIN_USER_ID) {
-          return Response.json({ error: "Acesso restrito ao proprietário." }, { status: 403 });
+        if (!isOwner && !(await isInvitedAdmin())) {
+          return Response.json({ error: "Seu e-mail ainda não foi autorizado pelo proprietário." }, { status: 403 });
         }
 
         if (!env.DB) {
@@ -111,7 +178,7 @@ const worker = {
           .bind(managedAssetsValue, managedAssetsLabel, updatedAt)
           .run();
 
-        return Response.json({ managedAssetsValue, managedAssetsLabel, canEdit: true });
+        return Response.json({ managedAssetsValue, managedAssetsLabel, canEdit: true, canManageUsers: isOwner });
       }
 
       return new Response("Method not allowed", { status: 405, headers: { Allow: "GET, PUT" } });
