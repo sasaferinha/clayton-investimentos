@@ -68,3 +68,19 @@ test("settings endpoint rejects anonymous writes", async () => {
 
   assert.equal(response.status, 401);
 });
+
+test("admin can start a password session", async () => {
+  const worker = await loadWorker("password-login");
+  const response = await worker.fetch(
+    new Request("http://localhost/api/admin-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: "test-password" }),
+    }),
+    { ...env, ADMIN_PASSWORD: "test-password", ADMIN_SESSION_SECRET: "test-session-secret" },
+    ctx,
+  );
+
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get("set-cookie") ?? "", /clayton_admin=/);
+});

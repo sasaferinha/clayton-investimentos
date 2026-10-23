@@ -16,6 +16,7 @@ export default function AdminPanel() {
   const [settings, setSettings] = useState<SiteSettings | null>(null);
   const [status, setStatus] = useState("");
   const [saving, setSaving] = useState(false);
+  const [password, setPassword] = useState("");
   const [adminEmail, setAdminEmail] = useState("");
   const [admins, setAdmins] = useState<AdminUser[]>([]);
 
@@ -39,6 +40,24 @@ export default function AdminPanel() {
     if (!response.ok) return;
     const data = (await response.json()) as { admins: AdminUser[] };
     setAdmins(data.admins);
+  }
+
+  async function login(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setStatus("");
+    const response = await fetch("/api/admin-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password }),
+    });
+    const data = (await response.json()) as { error?: string };
+    if (!response.ok) {
+      setStatus(data.error || "Não foi possível entrar.");
+      return;
+    }
+    const settingsResponse = await fetch("/api/site-settings", { cache: "no-store" });
+    setSettings((await settingsResponse.json()) as SiteSettings);
+    setPassword("");
   }
 
   async function inviteAdmin() {
@@ -98,12 +117,22 @@ export default function AdminPanel() {
 
   if (!settings.canEdit) {
     return (
-      <div className="adminLogin">
-        <p>Entre com a conta do proprietário para editar o conteúdo público.</p>
-        <a className="primary" href="/signin-with-chatgpt?return_to=%2Fadmin" target="_top">
-          Entrar no painel <span>↗</span>
-        </a>
-      </div>
+      <form className="adminLogin" onSubmit={login}>
+        <p>Digite a senha administrativa para alterar o conteúdo público.</p>
+        <label>
+          Senha do painel
+          <input
+            type="password"
+            required
+            autoComplete="current-password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            placeholder="Digite sua senha"
+          />
+        </label>
+        <button className="primary" type="submit">Entrar no painel</button>
+        {status && <p className="adminStatus" role="status">{status}</p>}
+      </form>
     );
   }
 

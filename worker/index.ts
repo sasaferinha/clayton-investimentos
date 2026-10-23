@@ -7,6 +7,8 @@ interface Env {
   DB?: D1Database;
   ADMIN_USER_ID?: string;
   ADMIN_OWNER_EMAIL?: string;
+  ADMIN_PASSWORD?: string;
+  ADMIN_SESSION_SECRET?: string;
   IMAGES: {
     input(stream: ReadableStream): {
       transform(options: Record<string, unknown>): {
@@ -31,6 +33,27 @@ const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
 
+    const encode = (value: Uint8Array) =>
+      Array.from(value, (byte) => byte.toString(16).padStart(2, "0")).join("");
+    const hmac = async (value: string) => {
+      if (!env.ADMIN_SESSION_SECRET) return "";
+      const key = await crypto.subtle.importKey(
+        "raw",
+        new TextEncoder().encode(env.ADMIN_SESSION_SECRET),
+        { name: "HMAC", hash: "SHA-256" },
+        false,
+        ["sign"],
+      );
+      return encode(new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(value))));
+    };
+    const verifyPasswordSession = async () => {
+      const match = request.headers.get("Cookie")?.match(/(?:^|;\s*)clayton_admin=([^;]+)/);
+      if (!match?.[1]) return false;
+      const [expires, signature] = decodeURIComponent(match[1]).split(".");
+      if (!expires || !signature || Number(expires) <= Date.now()) return false;
+      return signature === (await hmac(expires));
+    };
+
     const normalizeEmail = (value: string | null | undefined) => value?.trim().toLowerCase() ?? "";
     const userId = request.headers.get("oai-authenticated-user-id");
     const userEmail = normalizeEmail(request.headers.get("oai-authenticated-user-email"));
@@ -45,6 +68,42 @@ const worker = {
         .first<{ email: string }>();
       return Boolean(row);
     };
+
+    if (url.pathname === "/api/admin-login" && request.method === "POST") {
+      if (!env.ADMIN_PASSWORD || !env.ADMIN_SESSION_SECRET) {
+        return Response.json({ error: "Acesso por senha ainda não configurado." }, { status: 503 });
+      }
+
+      let body: { password?: unknown };
+      try {
+        body = await request.json();
+      } catch {
+        return Response.json({ error: "Dados inválidos." }, { status: 400 });
+      }
+
+      if (typeof body.password !== "string" || body.password !== env.ADMIN_PASSWORD) {
+        return Response.json({ error: "Senha incorreta." }, { status: 401 });
+      }
+
+      const expires = String(Date.now() + 7 * 24 * 60 * 60 * 1000);
+      const token = `${expires}.${await hmac(expires)}`;
+      return Response.json(
+        { ok: true },
+        {
+          headers: {
+            "Set-Cookie": `clayton_admin=${encodeURIComponent(token)}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=604800`,
+            "Cache-Control": "no-store",
+          },
+        },
+      );
+    }
+
+    if (url.pathname === "/api/admin-logout" && request.method === "POST") {
+      return Response.json(
+        { ok: true },
+        { headers: { "Set-Cookie": "clayton_admin=; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=0" } },
+      );
+    }
 
     if (url.pathname === "/api/admin-users") {
       if (!userId) {
@@ -121,7 +180,7 @@ const worker = {
           }
         }
 
-        const canEdit = isOwner || (await isInvitedAdmin());
+        const canEdit = isOwner || (await isInvitedAdmin()) || (await verifyPasswordSession());
         return Response.json(
           { ...settings, canEdit, canManageUsers: isOwner },
           {
@@ -134,12 +193,8 @@ const worker = {
       }
 
       if (request.method === "PUT") {
-        if (!userId) {
-          return Response.json({ error: "Faça login para editar." }, { status: 401 });
-        }
-
-        if (!isOwner && !(await isInvitedAdmin())) {
-          return Response.json({ error: "Seu e-mail ainda não foi autorizado pelo proprietário." }, { status: 403 });
+        if (!isOwner && !(await isInvitedAdmin()) && !(await verifyPasswordSession())) {
+          return Response.json({ error: "Entre com a senha do painel para editar." }, { status: 401 });
         }
 
         if (!env.DB) {
