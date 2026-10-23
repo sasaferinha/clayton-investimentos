@@ -1,4 +1,18 @@
 {
   "framework": "nextjs",
-  "buildCommand": "npx next build"
+  "buildCommand": "npx next build",
+  "rewrites": [
+    {
+      "source": "/api/site-settings",
+      "destination": "https://clayton-investimentos-admin.samuelvilas290.chatgpt.site/api/site-settings"
+    },
+    {
+      "source": "/api/admin-login",
+      "destination": "https://clayton-investimentos-admin.samuelvilas290.chatgpt.site/api/admin-login"
+    },
+    {
+      "source": "/api/admin-logout",
+      "destination": "https://clayton-investimentos-admin.samuelvilas290.chatgpt.site/api/admin-logout"
+    }
+  ]
 }

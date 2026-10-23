@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
-import { contentApiOrigin } from "../ManagedAssetsMetric";
 
 type SiteSettings = {
   managedAssetsValue: string;
@@ -21,11 +20,6 @@ export default function AdminPanel() {
   const [admins, setAdmins] = useState<AdminUser[]>([]);
 
   useEffect(() => {
-    if (window.location.origin !== contentApiOrigin) {
-      window.location.replace(`${contentApiOrigin}/admin`);
-      return;
-    }
-
     fetch("/api/site-settings", { cache: "no-store" })
       .then((response) => response.json() as Promise<SiteSettings>)
       .then((data) => {
